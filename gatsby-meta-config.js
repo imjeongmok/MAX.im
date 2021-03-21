@@ -2,19 +2,20 @@ module.exports = {
   title: `MAX.im`,
   description: `Blog posted about Frontend`,
   author: `[MAX]`,
-  introduction: `I explain with words and code. I explain with words and code. I explain with words and code.`,
+  introduction: `Record, Just than remember`,
   siteUrl: `https://gatsby-starter-bee.netlify.com`, // Your blog site url
   social: {
     twitter: ``, // Your Twitter account
-    github: ``, // Your GitHub account
+    github: `https://github.com/imjeongmok`, // Your GitHub account
     medium: ``, // Your Medium account
     facebook: ``, // Your Facebook account
     linkedin: ``, // Your LinkedIn account
   },
+  icon: 'content/assets/profile.png',
   keywords: [`blog`],
   comment: {
     disqusShortName: '', // Your disqus-short-name. check disqus.com.
-    utterances: 'limjungmok/MAX.im', // Your repository for archive comment
+    utterances: 'imjeongmok/MAX.im', // Your repository for archive comment
   },
   configs: {
     countOfInitialPost: 10, // Config your initial count of post
