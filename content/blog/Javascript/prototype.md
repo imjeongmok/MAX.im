@@ -11,6 +11,8 @@ draft: false
 ## Function.Prototype
 모든 함수는 프로토타입 객체를 가지고있다. 모든 함수는 `new` 키워드를 이용해 생성자 함수로써 사용될 수 있고, 그 반환값은 새로운 객체 `인스턴스`이다. 그리고 `__proto__(Dunder proto)` 라는 인스턴스의 멤버변수를 통해 자신을 생성한 생성자함수의 프로토타입객체에 접근이 가능하다. 해당 프로퍼티는 체이닝에 연결된 멤버변수, 메소드에 접근할 때 생략이 가능하지만, 프로토타입객체 자체에 접근하려면 반드시 명시해줘야 한다.
 
+![](./images/prototype_1.png)
+
 ```javascript
 function Person() {
   this.name = 'max';
@@ -29,11 +31,12 @@ Object.getPrototypeOf(max) === Person.prototype; // true
 프로토타입 객체는 항상 생성자 프로퍼티를 가지고있다. 생성자 프로퍼티는 함수 자기 자신이다.  
 함수와 프로토타입 객체의 도식화는 아래 그림과 같다.
 
-![](./images/prototype1.png)
 
 ## Why use Prototype pattern
 일반적으로 생성자 함수 내부에 멤버변수와 메소드를 구성하고 인스턴스를 여러개 생성한다고 해보자.
 애초에 생성자 함수를 정의하는건, 1개 이상의 인스턴스를 생성하여 효율적으로 사용하겠다는 [OOP](https://ko.wikipedia.org/wiki/%EA%B0%9D%EC%B2%B4_%EC%A7%80%ED%96%A5_%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D)적인 의도라고 봐도 무방하다. 여러 인스턴스는 독립적인 요소로 동작하는 절반의 성공을 거두었지만, 동일한 기능을 제공하는 메소드가 여러개 생성되어 메모리 문제가 발생했다고 볼수있다.
+
+![](./images/prototype_2.png)
 
 ```javascript
 function Person(name) {
