@@ -251,5 +251,5 @@ console.log(b);
 - https://developer.mozilla.org/ko/docs/Glossary/Hoisting
 - https://www.freecodecamp.org/news/what-is-the-temporal-dead-zone/
 - https://stackoverflow.com/questions/33198849/what-is-the-temporal-dead-zone/33198850#33198850
-
+- https://hyojin96.tistory.com/entry/%EC%8A%A4%EC%BD%94%ED%94%84%EC%97%90-%EB%8C%80%ED%95%B4%EC%84%9C
 - 코어 자바스크립트(도서)
