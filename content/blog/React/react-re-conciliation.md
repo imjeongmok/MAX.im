@@ -10,7 +10,7 @@ draft: false
 
 ## Reconciliation
 
-리액트 공식문서에서도 설명되어있듯이, 일반적으로 `DOM` 트리를 탐색하고 비교하는 알고리즘이 이미 존재하며, 해당 알고리즘는 `O(n^3)` 시간복잡도를 갖는다. 하지만 리액트의 diffing방식을 통해 `O(n)`까지 줄이는 데 성공했다고 한다. 시간복잡도를 유추 해 봤을때, 굉장히 선형적인 구조의 diffing이 예상되며, 실제로 다음과 같은 절차를 거친다고한다.
+리액트 공식문서에서도 설명되어있듯이, 일반적으로 `DOM` 트리를 탐색하고 비교하는 알고리즘이 이미 존재하며, 해당 알고리즘는 `O(n^3)` 시간복잡도를 갖는다. 하지만 리액트의 휴리스틱 알고리즘을 통해 `O(n)`까지 줄이는 데 성공했다고 한다. 시간복잡도를 유추 해 봤을때, 굉장히 선형적인 구조의 diffing이 예상되며, 실제로 다음과 같은 절차를 거친다고한다.
 
 - 노드의 타입이 다르다면, 자식 노드는 비교조차 하지 않는다.
 - 노드의 타입이 같다면, `VirtualDOM`의 프로퍼티만 변경한 후 `ReadDOM`에 반영한다.
@@ -136,7 +136,27 @@ class List extends React.Component {
 }
 ```
 
-https://codesandbox.io/s/withered-frost-92f0k?file=/src/App.js
+[Compare code](https://codesandbox.io/s/withered-frost-92f0k?file=/src/App.js)
+
+## React.Memo
+동작원리자체는 조금 다르지만, 용도는 거의 같다. 부모 컴포넌트가 리렌더링 될 때, Memized Component가 전달받는 props가 동일하다면 렌더링하지 않고 마지막 렌더링된 결과를 재사용한다. `React.memo`는 `props` 변화에만 영향을 받는다. 
+
+
+```javascript
+function MyComponent(props) {
+  /* props를 사용하여 렌더링 */
+}
+function areEqual(prevProps, nextProps) {
+  /*
+  nextProp가 prevProps와 동일한 값을 가지면 true를 반환하고, 그렇지 않다면 false를 반환
+  SCU와 정 반대의 동작을 한다. 
+  하지만 성능최적화를 위한 목적은 동일하다.
+  */
+}
+export default React.memo(MyComponent, areEqual);
+```
+
+[Memo code](https://codesandbox.io/s/confident-tdd-7sftm?file=/src/App.js)
 
 ## 정리
 
@@ -148,3 +168,4 @@ https://codesandbox.io/s/withered-frost-92f0k?file=/src/App.js
 - https://ko.reactjs.org/docs/reconciliation.html
 - https://github.com/Matt-Esch/virtual-dom
 - https://www.huskyhoochu.com/virtual-dom/
+- https://meetup.toast.com/posts/110
