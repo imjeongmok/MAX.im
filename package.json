@@ -72,7 +72,7 @@
   "main": "n/a",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/imjeongmok/MAX.im"
+    "url": "git+https://imjeongmok/MAX.im"
   },
   "scripts": {
     "post": "gatsby-post-gen",
