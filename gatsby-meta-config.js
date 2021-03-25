@@ -2,7 +2,7 @@ module.exports = {
   title: `MAX.im`,
   description: `Blog posted about Frontend`,
   author: `[MAX]`,
-  introduction: `Record, Just than remember`,
+  introduction: `Interested in Programming overall.`,
   siteUrl: `https://gatsby-starter-bee.netlify.com`, // Your blog site url
   social: {
     twitter: ``, // Your Twitter account
