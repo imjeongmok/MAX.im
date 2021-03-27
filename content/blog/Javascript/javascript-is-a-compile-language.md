@@ -33,11 +33,9 @@ draft: false
 자바스크립트 파일은 `.js` 형식의 텍스트 파일인데, V8 엔진은 이를 어떻게 읽고 해석할 수 있을까?
 V8 엔진은 파싱하기 전에, `UTF-16` 변환과 `Scanner`를 통한 `Token` 생성 과정을 거친다. 이때 생성되는 토큰들은 개발자가 정의한 `변수`와 `함수` 들이다. 
 
-호이스팅을 말하기 까지 여기까지 오게되었다. 호이스팅이 어떻게 발생하는지 뭔가 예상이 되는 과정 중 하나다.
-
 
 ## Parsing to AST
-V8의 `Parser`는 생성된 토큰을 이용해 AST를 생성한다. AST는 트리형태의 구조화 된 소스코드이며, 컴파일 과정에 사용된다. 아래 AST 트리를 구성하는 코드를 보면 더욱 확실해 진다. 이미 자바스크립트 엔진은 `console.log` 함수호출 코드를 읽기 이전에 AST를 형성하는 과정에 `name` 변수의 존재를 알고 트리를 구축하고있다. 쉽게 말하면, AST를 형성하기 위해 전체 코드를 미리 한번 훑어본다고 이해하면된다.
+V8의 `Parser`는 생성된 토큰을 이용해 AST를 생성한다. AST는 트리형태의 구조화 된 소스코드이며, 컴파일 과정에 사용된다. 쉽게 말하면, AST를 형성하기 위해 전체 코드를 미리 한번 훑어본다고 이해하면된다.
 
 [AST JSON Converter](https://astexplorer.net/)
 ```javascript
@@ -102,11 +100,11 @@ function Person(name) {
 }
 ```
 ## Ignition
-V8 엔진의 인터프리터다. AST 트리를 해석하여 bytecode 를 생성한다. 한줄 한줄 읽으며, 필요할 때 컴파일 과정을 거치는 것이다. 위에 설명한 것 처럼 `profiling data` + `bytecode`를 TurboFan에게 전달하여 최적화 바이트코드를 기대하는것이다.
+AST 트리를 해석하여 bytecode를 생성하는 인터프리터다. 한줄 한줄 읽으며, 필요할 때 컴파일 과정을 거치는 것이다. 위에 설명한 것 처럼 `profiling data` + `bytecode`를 TurboFan에게 전달하여 최적화 바이트코드를 기대하는것이다.
 
 
 ## TurboFan
-V8 엔진의 최적화 컴파일을 위해 항상 가열되고, 열을 식히는 역할이다. 최적화된 바이트코드를 반환하기도 하고, 최적화가 불가능하다면 `deoptimized bytecode`를 다시 반환한다.
+V8 엔진의 최적화를 담당하는 컴파일러다. 최적화된 바이트코드를 반환하기도 하고, 최적화(히든클래스, 인라인 캐싱 방식)가 불가능하다면 `deoptimized bytecode`를 다시 반환한다.
 
 ## 정리
 Javascript 코드는 인터프리터에 의해 해석되고 실행된다. 인터프리터가 있는 V8 엔진 내부를 들여다보면, 최적화를 위한 JIT 컴파일이 발생하여 오늘날 '컴파일러 언어'에 버금가는 성능을 브라우저에서 제공하는것이다.
@@ -125,3 +123,4 @@ Javascript 코드는 인터프리터에 의해 해석되고 실행된다. 인터
 - https://pks2974.medium.com/v8-%EC%97%90%EC%84%9C-javascript-%EC%BD%94%EB%93%9C%EB%A5%BC-%EC%8B%A4%ED%96%89%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95-%EC%A0%95%EB%A6%AC%ED%95%B4%EB%B3%B4%EA%B8%B0-25837f61f551
 - https://hyojin96.tistory.com/entry/%EC%8A%A4%EC%BD%94%ED%94%84%EC%97%90-%EB%8C%80%ED%95%B4%EC%84%9C
 - https://blog.sessionstack.com/how-javascript-works-parsing-abstract-syntax-trees-asts-5-tips-on-how-to-minimize-parse-time-abfcf7e8a0c8
+- https://helloinyong.tistory.com/290
