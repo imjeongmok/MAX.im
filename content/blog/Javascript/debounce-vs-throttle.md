@@ -47,17 +47,17 @@ function throttle(cb, delay) {
   let isFired = false; // delay 마다 실행해야 하기 때문에, 실행 Flag 필요
 
   return function () {
-    if (!isFired) { // 한번 실행 후
-      cb.apply(this, arguments);
-      isFired = true;
-    }
+    if (isFired) return; // 한번 실행했다면 기다림
 
-    /**
+    cb.apply(this, arguments);
+    isFired = true;
+
+    /*
     * delay 마다 flag를 초기화한다.
     * delay 후에 flag가 초기화 되어야 위에서 콜백함수를 실행할수있다.
     */
     setTimeout(() => {
-      if (isFired) isFired = false;
+      isFired = false;
     }, delay);
   };
 }
