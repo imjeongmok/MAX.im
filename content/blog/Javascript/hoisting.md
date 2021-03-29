@@ -115,7 +115,7 @@ function fn(a){
 fn(10);
 
 ---- 호이스팅 과정 ----
-function fn(paramA = 10) {
+function fn(a = 10) {
   var a;
   console.log('1', a); // 10
   a = 20;
@@ -126,8 +126,8 @@ fn();
 
 ---- 호이스팅 과정 ----
 function fn() {
-  var paramA;
-  paramaA = 10; // 사실 var paramA = 10 도 무방하다.
+  var a; // 매개변수의 선언부분
+  a = 10; // 사실 var paramA = 10 도 무방하다.
   var a;
 
   console.log('1', a); // 10
