@@ -11,7 +11,7 @@ draft: false
 
 
 ## 호이스팅은 어떻게 일어나는 것인가
-호이스팅은 w3C 명세에 표준으로 기술되어있지 않다. 물리적으로 변수의 '선언'부분이 이동하는건 아니지만, 그렇게 동작하긴 한다. 변수의 선언 및 함수 선언식 전체는 `Compile` 단계에서 메모리에 저장된다. [Javascript is a Compile language](https://max-im.netlify.app/Javascript/javascript-is-a-compile-language/) 에서 컴파일 과정을 이해한다면, 호이스팅 개념의 발생이 '**필연적**'이라는 것을 알 수 있다. 자바스크립트 문서를 파싱하고, AST 트리를 형성할 때 이미 어떠한 변수들이 사용되고있는지 알고 있는것이다. **즉, 모든 선언 키워드를 이용한 구문은 호이스팅 된다.** ECMA 문서 스펙에 따라, TDZ의 영향을 받는지의 차이에 따라 `Reference Error` 또는 `undefined` 결과를 출력할 뿐이다.
+호이스팅은 w3C 명세에 표준으로 기술되어있지 않다. 물리적으로 변수의 '선언'부분이 이동하는건 아니지만, 그렇게 동작하긴 한다. 변수의 선언 및 함수 선언식 전체는 `Compile` 단계에서 메모리에 저장된다. [Javascript is a Compile language](https://max-im.netlify.app/Javascript/javascript-is-a-compile-language/) 에서 컴파일 과정을 이해한다면, 호이스팅 개념의 발생이 '**필연적**'이라는 것을 알 수 있다. 자바스크립트 문서를 파싱하고, AST 트리를 형성할 때 이미 어떠한 변수들이 사용되고있는지 알고 있는것이다. **즉, 모든 선언은 호이스팅 된다.** ECMA 문서 스펙에 따라, TDZ의 영향을 받는지의 차이에 따라 `Reference Error` 또는 `undefined` 결과를 출력할 뿐이다.
 
 ## TDZ
 자바스크립트에서 변수를 메모리공간에 확보시키는 과정이 있다. 
