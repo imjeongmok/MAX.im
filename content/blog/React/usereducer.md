@@ -87,6 +87,8 @@ const ThemedButton = () => {
 
 ## useReducer + middleware Hook
 
+[Sample Code](https://codesandbox.io/s/usereducer-middleware-hook-qrizo)
+
 Redux를 쓸 때 사실 비동기 미들웨어를 사용할 수 없을것이라는 단점을 생각했는데, 훅으로 구현하면서 이부분을 더욱 가독성 좋게 유지할 수 있을것같다.
 또한 스토어에 액션이 전달될 때, 모든 액션을 미들웨어에서 한번 후킹 할 필요없이, 필요한 리듀서들에게만 적용한다면 더욱 좋지않을까 생각이 든다.
 
