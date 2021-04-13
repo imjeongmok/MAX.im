@@ -157,6 +157,27 @@ const ThemedButton: React.FC = () => {
 }
 ```
 
+## Provider 중첩시 발생하는 강한 Coupling
+다수의 Provider를 사용하게되면, 자연스럽게 Provider끼리 감싸고 감싸진 구조가 형성된다.  
+최상위 ResizeContext가 변경이된다고 할 때, 그렇다면 자연스럽게 ThemeContext를 구독하는 Consumer 컴포넌트도 리렌더링 된다. 리사이즈 경우 전역에서 상태값을 관리해야 하는 경우가 발생하는데, 최상위 Provider가 되어야 한다. 하지만 그 결과 리사이즈가 될 때 중첩된 Provider의 Consumer 컴포넌트가 모두 리렌더링되는 참사가 벌어진다. 이 경우 React.memo를 이용해 리렌더링을 막을수도 없다. 어찌보면 리덕스로 빼버리는게 답일 수 있다.
+
+
+```javascript
+
+<ResizeContext.Provider>
+  <ThemeContext.Provider>
+    {/* Consumer List */}
+    <ThemeContextConsumer> {/* 리렌더링되지 않길 바라지만 리렌더링된다. */}
+      <ResizeContextCounsumer> {/* 실제 리렌더링 목적의 컴포넌트 */}
+    </ThemeContextConsumer>>
+
+  </ThemeContext.Provider>
+</ResizeContext.Provider>
+
+```
+
+## 결론
+
 결론부터 말하면, `React.memo` 혹은 `useMemo`를 사용하여 컴포넌트를 생성하면, 전역 컨텍스트의 상태값이 변경되어도 리렌더링되지 않는다.
 하지만 공식홈페이지에서 언급한것처럼, 클래스형 컴포넌트와 `shouldComponentUpdate(scu)`, 혹은 `PureComponent(PC)`를 사용한 컴포넌트 생성으로 리렌더링을 막을 순 없었다.
 모든 중간에 중첩된 컴포넌트를 메모하는건 어떨까? 당연히 메모리낭비를 불러온다. 메모이제이션은 무적이 아니다. 이럴때 차라리 리덕스를 사용하고 기존 컴포넌트는 `scu`, `PC`를 이용해 구현하는게 조금더 올바른 선택지 아닐까 싶다.
