@@ -1,7 +1,7 @@
 ---
-title: Context API
+title: (State Managerment - 1) Context API
 date: 2021-04-10 15:04:65
-category: react
+category: React
 thumbnail: { thumbnailSrc }
 draft: false
 ---

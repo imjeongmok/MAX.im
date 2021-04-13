@@ -1,7 +1,7 @@
 ---
-title: useReducer
+title: (State Managerment - 2) useReducer
 date: 2021-04-10 16:04:77
-category: react
+category: React
 thumbnail: { thumbnailSrc }
 draft: false
 ---
