@@ -162,6 +162,7 @@ const ThemedButton: React.FC = () => {
 최상위 ResizeContext가 변경이된다고 할 때, 그렇다면 자연스럽게 ThemeContext를 구독하는 Consumer 컴포넌트도 리렌더링 된다. 리사이즈 경우 전역에서 상태값을 관리해야 하는 경우가 발생하는데, 최상위 Provider가 되어야 한다. 하지만 그 결과 리사이즈가 될 때 중첩된 Provider의 Consumer 컴포넌트가 모두 리렌더링되는 참사가 벌어진다. 이 경우 React.memo를 이용해 리렌더링을 막을수도 없다. 어찌보면 리덕스로 빼버리는게 답일 수 있다.
 
 
+[예제코드](https://codesandbox.io/s/vigilant-forest-hbem4?file=/src/App.js)
 ```javascript
 
 <ResizeContext.Provider>
