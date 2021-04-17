@@ -6,7 +6,8 @@ thumbnail: { thumbnailSrc }
 draft: false
 ---
 
-문제 : https://app.codility.com/programmers/lessons/5-prefix_sums/count_div/
+## 문제
+https://app.codility.com/programmers/lessons/5-prefix_sums/count_div/
 
 A ~ B 사이의 숫자를, K로 나눈 나머지가 0인 값의 카운트를 구하라
 
