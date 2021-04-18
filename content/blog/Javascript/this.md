@@ -26,7 +26,7 @@ var obj = {
 }
 
 var fn = obj.b;
-b() // Window
+fn() // Window
 ```
 
 ## 생성자 함수 호출
