@@ -124,3 +124,4 @@ Javascript 코드는 인터프리터에 의해 해석되고 실행된다. 인터
 - https://hyojin96.tistory.com/entry/%EC%8A%A4%EC%BD%94%ED%94%84%EC%97%90-%EB%8C%80%ED%95%B4%EC%84%9C
 - https://blog.sessionstack.com/how-javascript-works-parsing-abstract-syntax-trees-asts-5-tips-on-how-to-minimize-parse-time-abfcf7e8a0c8
 - https://helloinyong.tistory.com/290
+- https://alledy.netlify.app/posts/v8-engine/
