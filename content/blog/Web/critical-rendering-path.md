@@ -82,8 +82,7 @@ span { color: red }
 
 #### [VSync]
 브라우저의 동작 과정 단위인 프레임을 메모리에 저장된 버퍼로부터, GPU 로 fetch 하는데 걸리는 시간이 16.6ms이다.
-이를 해서하면 DOM ~ Composite 과정을 16.6ms 이내에 끝내야 렌더링 성능이 보장된다는 것이다. 하지만 현실과 이상은 다르고, 이를 완벽하게 구현해내기 어렵다. 2012 Google I/O 에서 발표된 `VSync` 내용은, 프레임 생성을 16.6ms 단위에 맞게 보정해주는 역할이다.
-
+이를 해석하면 DOM ~ Composite 과정을 16.6ms 이내에 끝내야 렌더링 성능이 보장된다는 것이다. 하지만 현실과 이상은 다르고, 이를 완벽하게 구현해내기 어렵다. 2012 Google I/O 에서 발표된 `VSync` 내용은, 프레임 생성을 16.6ms 단위에 맞게 보정해주는 역할이다. 페인트 과정을 래스터를 나누거나, 구간을 당기는 식으로 최적화한다.
 
 ## Over the Main Thread
 
@@ -101,6 +100,54 @@ Critical Rendering Path 최적화란, 결국 위 단계의 수행 시간을 최�
 우리는 Layout, Paint 과정을 줄이고, VSync가 잘 동작하도록 구간별 최적화를 해야한다.
 특히 [CSS 트리거](https://csstriggers.com/)를 이용해 컴포지트 쓰레드를 사용하는 속성을 적용하도록 노력해야 하며, 자바스크립트 애니메이션을 구현할 땐 rAF를 최대한 사용해도록 노력해보자.
 
+
+## plus 이슈
+
+#### [레이아웃 스레싱?]
+
+아래 두 코드는 무슨 차이일까? 둘다 console 함수를 이용해 박스모델에 접근할 뿐이고, 공통점으로는 동기적인 레이아웃이 예상된다는것이다. 하지만 레이아웃 작업이 끝난 후 콘솔을 찍는것과, 레이아웃 전에 콘솔을 찍는건 분명 결과값이 다르고, 이로인한 레이아웃 병목현상이 존재한다는 것이다. 콘솔뿐만 아닌 프로덕션 코드에서도 이러한 코드는 피하자.
+
+```javascript
+function logBoxHeight() {
+  console.log(box.offsetHeight);
+
+  box.classList.add('super-big');
+
+  // Gets the height of the box in pixels
+  // and logs it out.
+}
+
+/* 개선코드 */
+function logBoxHeight() {
+  box.classList.add('super-big');
+
+  // Gets the height of the box in pixels
+  // and logs it out.
+  console.log(box.offsetHeight);
+}
+
+```
+
+```javascript
+function resizeAllParagraphsToMatchBlockWidth() {
+
+  // Puts the browser into a read-write-read-write cycle.
+  for (var i = 0; i < paragraphs.length; i++) {
+    paragraphs[i].style.width = box.offsetWidth + 'px';
+  }
+}
+
+/* 개선코드 */
+var width = box.offsetWidth; // 레이아웃 스레싱을 피하기 위함.
+
+function resizeAllParagraphsToMatchBlockWidth() {
+  for (var i = 0; i < paragraphs.length; i++) {
+    // Now write.
+    paragraphs[i].style.width = width + 'px';
+  }
+}
+
+```
 
 ## Reference
 - [MDN 객체모델 생성](https://developers.google.com/web/fundamentals/performance/critical-rendering-path/constructing-the-object-model?hl=ko)
