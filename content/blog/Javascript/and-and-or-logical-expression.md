@@ -66,6 +66,11 @@ null || undefined // undefined
 false || 0 // 0 
 ```
 
+## 결론
+
+`||`, `&&` 표현식의 결과는 항상 '피연사자의 값 중 하나'이다.  
+평가결과가 절대 아님을 다시한번 이해하자.  
+
 
 ## Reference
 - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Logical_OR
