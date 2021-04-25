@@ -6,7 +6,7 @@ module.exports = {
   siteUrl: `https://gatsby-starter-bee.netlify.com`, // Your blog site url
   social: {
     twitter: ``, // Your Twitter account
-    github: `https://github.com/imjeongmok`, // Your GitHub account
+    github: `limjungmok`, // Your GitHub account
     medium: ``, // Your Medium account
     facebook: ``, // Your Facebook account
     linkedin: ``, // Your LinkedIn account
